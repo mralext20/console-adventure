@@ -1,6 +1,5 @@
 using System;
 using console_adventure.Interfaces;
-using console_adventure.Models;
 
 namespace console_adventure.Controllers
 {
@@ -64,5 +63,4 @@ namespace console_adventure.Controllers
     }
   }
 
-}
 }
