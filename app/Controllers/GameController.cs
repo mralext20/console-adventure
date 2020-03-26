@@ -1,5 +1,6 @@
 using System;
 using console_adventure.Interfaces;
+using console_adventure.Services;
 
 namespace console_adventure.Controllers
 {
@@ -10,6 +11,10 @@ namespace console_adventure.Controllers
     private bool _running { get; set; } = true;
     public void Run()
     {
+      System.Console.Write("What is your name?: ");
+      _gs = new GameService(Console.ReadLine().Trim());
+      _gs.Look();
+      Print();
       while (_running)
       {
         GetUserInput();
@@ -48,7 +53,6 @@ namespace console_adventure.Controllers
           break;
         default:
           _gs.Messages.Add("Not a recognized command");
-          _gs.Look();
           break;
       }
     }

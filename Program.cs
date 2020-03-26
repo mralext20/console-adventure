@@ -1,12 +1,14 @@
 ﻿using System;
+using console_adventure.Controllers;
 
 namespace console_adventure
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+      GameController _gc = new GameController();
+      _gc.Run();
     }
+  }
 }
