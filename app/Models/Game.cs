@@ -15,31 +15,42 @@ namespace console_adventure.Models
 
 
       // NOTE Create all rooms
-      Room produce = new Room("Produce Section", "Plenty of Fruit and Veggies, wonder why no on is stockpiling these yet");
-      Room electronics = new Room("Electronics", "Lots of stuff still here, yet no webcams in sight.");
-      Room frozenFoods = new Room("Frozen Foods", "Mostly empty shelves though the vegan chocolate hummus is still in stock for some reason");
-      EndRoom checkout = new EndRoom("Checkout", "A stressed minimum wage employee stares out you with a thousand yard stare, he has seen too much these last few weeks", true, "You breeze through the checkout with your new found wealth!");
-      EndRoom toiletPaperIsle = new EndRoom("Toiletries", "A hoarde of people are racing through this aisle with their weapons out", false, "You are trampled under foot and your name is lost to history");
+      Room home = new Room("Home", "your current house. there is a desk with your important documents, and a packed suitcase. ");
+      Room car = new Room("car", "a vehicle, someone is ready to take you to the airport.");
+      Room airport = new Room("airport", "the airport. you arrive, and give the Airline Agent your bag.");
+      Room tsaArea = new Room("TSA Area", "a high security area where you get screened. hope you have yuor ID Card handy");
+      Room gateArea = new Room("Gate 2B", "a waiting area for a plane. the sign says 'Direct Flight to Alaska'");
+      Room plane = new Room("a standard boeing 757", "you quickly find your seat. this is going to be a long plane ride... i think i packed a pillow!");
+      Room anchorageAirport = new Room("anchorage International Airport", "you have landed! welcome to Alaska. your luggage is east of here.");
+      Room aAirportLuggage = new EndRoom("Luggage Area", "luggagemachine go brrrrrr", true, "you find your luggage, and get out of the airport, time to get home\n\n To Be Continied...");
+
+      Room mcDonalds = new EndRoom("McDonalds", "you go to order a big mac", false, "you have cought the CoronaVirus.");
+      Room boiseFryCo = new EndRoom("Boise Fry Co", "you go to order a large plate of frys", false, "you have missed your flight.");
 
       // NOTE Create all Items
-      Item tp = new Item("Toilet Paper", "A Single Roll of precious paper, it must have fallen from a pack");
+      Item idcard = new Item("ID Card", "Your ID Card. kinda important. ");
+      Item ticket = new Item("Ticket", "describes the gate as 2B. ");
+      Item pillow = new Item("Pillow", "could be usfil to pass the time.");
 
       // NOTE Make Room Relationships
-      produce.Exits.Add("east", electronics);
-      electronics.Exits.Add("west", produce);
-      electronics.Exits.Add("north", frozenFoods);
-      electronics.Exits.Add("east", toiletPaperIsle);
-      frozenFoods.Exits.Add("south", electronics);
-
-      frozenFoods.AddLockedRoom(tp, "west", checkout);
-      checkout.Exits.Add("east", frozenFoods);
-
+      home.Exits.Add("east", car);
+      car.Exits.Add("east", airport);
+      airport.Exits.Add("west", tsaArea);
+      airport.Exits.Add("south", boiseFryCo);
+      tsaArea.Exits.Add("east", airport);
+      tsaArea.AddLockedRoom(idcard, "west", gateArea);
+      gateArea.Exits.Add("east", airport);
+      gateArea.AddLockedRoom(ticket, "west", plane);
+      plane.AddLockedRoom(pillow, "east", anchorageAirport);
+      anchorageAirport.Exits.Add("south", mcDonalds);
+      anchorageAirport.Exits.Add("east", aAirportLuggage);
 
       // NOTE put Items in Rooms
-      electronics.Items.Add(tp);
+      home.Items.Add(idcard);
+      airport.Items.Add(ticket);
+      plane.Items.Add(pillow);
 
-
-      CurrentRoom = produce;
+      CurrentRoom = home;
     }
   }
 }

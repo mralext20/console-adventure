@@ -7,7 +7,7 @@ namespace console_adventure.Controllers
   class GameController : IGameController
   {
 
-    private IGameService _gs { get; set; }
+    private GameService _gs { get; set; }
     private bool _running { get; set; } = true;
     public void Run()
     {
@@ -50,6 +50,9 @@ namespace console_adventure.Controllers
           break;
         case "use":
           _gs.Use(option);
+          break;
+        case "help":
+          _gs.Help();
           break;
         default:
           _gs.Messages.Add("Not a recognized command");
